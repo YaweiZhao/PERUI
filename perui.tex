@@ -1,0 +1,214 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epstopdf}
+\usepackage{mdwmath}
+\usepackage{mdwtab}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage[noend]{algpseudocode}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{balance}
+\usepackage{bm}
+\usepackage{ulem}
+
+\usepackage{pifont}
+\usepackage{epsfig,tabularx}
+%\usepackage{mathptmx}
+\usepackage{url}
+\usepackage[marginal]{footmisc}
+
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\pdfinfo{
+/Title (PERUI: A General Framework of Reduced Variance Stochastic Gradient Gradient and the Hybrid Implementation)
+/Author (Yawei Zhao, Yuewei Ming, Jianping Yin)}
+\setcounter{secnumdepth}{0}
+ \begin{document}
+% The file aaai.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+\title{PERUI: A General Framework of Reduced Variance Stochastic Gradient Gradient and the Hybrid Implementation}
+\author{Yawei Zhao\\
+School of Computer\\
+National University\\
+of Defense Technology\\
+Changsha, China, 410073\\
+\And
+Yuewei Ming\\
+School of Computer\\
+National University\\
+of Defense Technology\\
+Changsha, China, 410073\\
+\And
+Jianping Yin\\
+School of Computer\\
+National University\\
+of Defense Technology\\
+Changsha, China, 410073\\
+}
+%\author{Paper ID: 112}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+\label{sect_introduction}
+
+
+
+\section{Related work}
+\label{sect_related_work}
+
+
+
+
+\section{The general hybrid framework of SGD}
+\label{sect_framework}
+
+
+\begin{algorithm}[t]
+    \caption{The general framework of variance reduced SGD: PERUI}
+    \label{algorithm_combine}
+    \begin{algorithmic}[1]
+        \Require $\omega^0\in \mathbb{R}^d$. $\forall i\in[n]$, and $[n]$ represents $\{1,2, ..., n\}$.
+        \State \textbf{\uline{P}robability:} $[i_t]\leftarrow \mathcal{P}([n])$ where $i_t \in \{1,2, ..., n\}$. $t$ is a positive integer;
+        \State \textbf{\uline{E}poch:} the sequence of the epoch size $\{m^0, m^1, ..., m^S\}\leftarrow \mathcal{E}([i_t])$;
+        \For {$s=0,1,2,...,S$}
+            \State $\omega_0^s=\tilde{\omega}^s$;
+            \State $g=\frac{1}{n}\sum\limits{i=1}^n\nabla f_i(\tilde{\omega}^s)$;
+            \For {$t<m^s$}
+                \State \textbf{\uline{R}educed variance:} $v=\mathcal{R}(\nabla f_{i_t}(\omega_{i_t}^t)-\nabla f_{i_t}(\tilde{\omega}^s))$;
+                \State $\gamma_t^s=v+g$;
+                \State \textbf{\uline{U}pdate:} $\omega_{t+1}^s=\mathcal{U}(\eta_t, \omega_t^s, \gamma_t^s)$;
+            \EndFor
+            \textbf{\uline{I}dentification:} $\tilde{w}^{s+1}\leftarrow\mathcal{I}([\omega_j^s])$ with $j\in\{1,2, ..., m^s\}$;
+        \EndFor
+        \Return $\tilde{\omega}^S$.
+    \end{algorithmic}
+\end{algorithm}
+
+
+
+
+%\begin{figure}
+%\centering
+%\subfigure{\includegraphics[width=0.86\columnwidth]{figures/evaluation_accelerated_factor}}
+%\caption{The learning rate with the acceleration factor makes DisSVRG converge fast significantly.}
+%\label{figure_evaluation_accelerated_factor}
+%\end{figure}
+
+
+
+
+
+\section{Convergence analysis}
+\label{sect_convergence_analysis}
+
+
+
+
+
+
+
+
+\section{Optimization}
+\label{sect_optimization}
+
+
+
+\subsection{Constant learning rate with an acceleration factor}
+\label{sect_acceleration_factor}
+
+
+
+
+
+
+
+\subsection{Adaptive update sharing strategy}
+\label{sect_update_sharing}
+
+
+
+
+\section{Discussion}
+\label{sect_discussion}
+
+
+
+
+
+
+
+
+
+\section{Performance evaluation}
+\label{sect_performance_evaluation}
+
+
+
+
+\subsection{Convergence}
+\label{sect_performance_evaluation_convergence}
+
+
+
+
+
+
+
+\subsection{Speed up}
+\label{sect_performance_evaluation_speed_up}
+
+
+
+
+
+
+
+\subsection{Wait time}
+\label{sect_performance_evaluation_wait_time}
+
+
+
+
+
+
+\subsection{Parallel threads}
+\label{sect_performance_evaluation_parallel_threads}
+
+
+
+
+
+\section{Conclusion}
+\label{sect_conclusion}
+
+
+
+
+
+
+
+
+\section*{Acknowledgements}
+
+\bibliography{reference}
+\bibliographystyle{aaai}
+
+\end{document}
